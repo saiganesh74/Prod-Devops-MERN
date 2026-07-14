@@ -1,0 +1,35 @@
+services:
+  frontend:
+    image: mern-frontend:v1
+    ports:
+      - 8081:80
+    networks:
+      - frontend-network
+  backend: 
+    image: mern-backend:v1
+    depends_on:
+      - redis
+      - mongo
+    environment:
+      MONGO_URI: mongodb://mongo:27017/ecommerce
+      REDIS_HOST: redis
+    networks:
+      - frontend-network
+      - backend-network
+  mongo: 
+    image: mongo:7
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - backend-network
+
+  redis: 
+    image: redis:7
+    networks:
+      - backend-network
+volumes:
+  mongo-data:
+
+networks:
+  frontend-network:
+  backend-network:
