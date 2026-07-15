@@ -74,7 +74,7 @@ pipeline {
         stage('Docker Frontend image '){
             steps{
                 dir('frontend'){
-                    sh 'docker build -t mern-frontend:v1'
+                    sh 'docker build -t mern-frontend:${BUILD_NUMBER}  .'
                 }
             }
         }
