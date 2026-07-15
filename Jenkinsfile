@@ -14,6 +14,76 @@ pipeline {
                 sh 'ls -la'
             }
         }
+        stage('Verify Tools'){
+            steps{
+                sh '''
+                    node -v
+                    npm -v
+                    docker --version
+                    git --version
+                '''
+            }
+        }
+        stage('Install backend Dependencies'){
+            steps{
+                sh 'npm ci'
+            }
+        }
+        stage('Install Frontend Dependencies'){
+            steps{
+                dir('frontend'){
+                    sh 'npm ci'
+                }
+            }
+        }
+
+        stage('Backend - Audit'){
+            steps{
+                dir('backend'){
+                    sh 'npm audit --audit-level=critical'
+                }
+            }
+        }
+
+        stage('Frontend - Audit'){
+            steps{
+                dir('frontend'){
+                    sh 'npm audit --audit-level=critical'
+                }
+            }
+        }
+
+        stage('Build frontend'){
+            steps{
+                dir('frontend'){
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        stage('Build backend'){
+            steps{
+                dir('backend'){
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        stage('Docker backend image '){
+            steps{
+                dir('backend'){
+                    sh 'docker build -t mern-backend:${BUILD_NUMBER} -f backend/Dockerfile .'
+                }
+            }
+        }
+
+        stage('Docker Frontend image '){
+            steps{
+                dir('frontend'){
+                    sh 'docker build -t mern-frontend:v1'
+                }
+            }
+        }
 
     }
 }
