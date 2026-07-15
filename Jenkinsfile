@@ -27,7 +27,7 @@ pipeline {
         stage('Install backend Dependencies'){
             steps{
                 dir('backend'){
-                sh 'npm ci'
+                    sh 'npm ci'
                 }
             }
         }
