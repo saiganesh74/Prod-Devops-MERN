@@ -72,7 +72,7 @@ pipeline {
         stage('Docker backend image '){
             steps{
                 dir('backend'){
-                    sh 'docker build -t mern-backend:${BUILD_NUMBER} -f backend/Dockerfile .'
+                    sh 'docker build -t mern-backend:${BUILD_NUMBER} -f ./Dockerfile .'
                 }
             }
         }
