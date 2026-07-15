@@ -41,6 +41,7 @@ pipeline {
             steps{
                 dir('backend'){
                     sh 'npm audit --audit-level=critical'
+                    sh 'npm audit fix'
                 }
             }
         }
@@ -49,6 +50,8 @@ pipeline {
             steps{
                 dir('frontend'){
                     sh 'npm audit --audit-level=critical'
+                    sh 'npm audit fix'
+
                 }
             }
         }
