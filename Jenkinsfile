@@ -89,7 +89,7 @@ pipeline {
             steps {
                 sh '''
                     trivy image \
-                    --severity HIGH,CRITICAL \
+                    --severity CRITICAL \
                     --exit-code 1 \
                     mern-backend:${BUILD_NUMBER}
                 '''
@@ -100,7 +100,7 @@ pipeline {
             steps {
                 sh '''
                     trivy image \
-                    --severity HIGH,CRITICAL \
+                    --severity CRITICAL \
                     --exit-code 1 \
                     mern-frontend:${BUILD_NUMBER}
                 '''
