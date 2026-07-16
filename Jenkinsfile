@@ -79,5 +79,11 @@ pipeline {
             }
         }
 
+        stage('Checking trivy version '){
+            steps{
+                    sh 'trivy --version'
+            }
+        }
+
     }
 }
