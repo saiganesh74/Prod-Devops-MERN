@@ -85,5 +85,28 @@ pipeline {
             }
         }
 
+        stage('Trivy Backend Image Scan') {
+            steps {
+                sh '''
+                    trivy image \
+                    --severity HIGH,CRITICAL \
+                    --exit-code 1 \
+                    mern-backend:${BUILD_NUMBER}
+                '''
+            }
+        }
+    
+        stage('Trivy frontent Image Scan') {
+            steps {
+                sh '''
+                    trivy image \
+                    --severity HIGH,CRITICAL \
+                    --exit-code 1 \
+                    mern-frontend:${BUILD_NUMBER}
+                '''
+            }
+        }
+    
+    
     }
 }
