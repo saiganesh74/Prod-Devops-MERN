@@ -79,9 +79,9 @@ pipeline {
             }
         }
 
-        stage('Checking trivy version '){
+        stage(' Trivy File scan '){
             steps{
-                    sh 'trivy --version'
+                    sh 'trivy fs --severity HIGH,CRITICAL .'
             }
         }
 
