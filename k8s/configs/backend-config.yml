@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: backend-config
+  namespace: mern
+
+data:
+  MONGO_HOST: mongo-service
+  MONGO_PORT: "27017"
+  MONGO_DATABASE: ecommerce
+
+  REDIS_HOST: redis-service
+  REDIS_PORT: "6379"
