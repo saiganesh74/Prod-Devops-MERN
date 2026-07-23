@@ -5,6 +5,7 @@ metadata:
   name: mongo
   namespace: mern
 
+
 spec:
   serviceName: mongo-service
   replicas: 1
